@@ -1,0 +1,98 @@
+
+//+------------------------------------------------------------------+
+//|                                         The Gold Trader         |
+//|                                          forexroboteasy.com      |
+//|                                          Forex Robot Easy Team   |
+//+------------------------------------------------------------------+
+
+// Include necessary libraries
+#include <Trade\Trade.mqh>
+
+// Define constants
+#define SYMBOL 'XAUUSD'
+#define LOT_SIZE 0.01
+#define STOP_LOSS 50
+#define TAKE_PROFIT 100
+
+// Create an instance of the trade class
+CTrade trade;
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+int OnInit()
+{
+   // Set the symbol
+   trade.SetSymbol(SYMBOL);
+
+   return(INIT_SUCCEEDED);
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTick()
+{
+   // Check if there are any potential trading opportunities
+   if (IsOpportunityPresent())
+   {
+      // Get the current market price
+      double marketPrice = trade.MarketInfo(Symbol(), MODE_BID);
+
+      // Calculate the stop loss and take profit levels
+      double stopLoss = marketPrice - STOP_LOSS * SymbolInfoDouble(Symbol(), SYMBOL_POINT);
+      double takeProfit = marketPrice + TAKE_PROFIT * SymbolInfoDouble(Symbol(), SYMBOL_POINT);
+
+      // Open a buy trade with the specified lot size, stop loss, and take profit
+      trade.Buy(LOT_SIZE, stopLoss, takeProfit);
+   }
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+bool IsOpportunityPresent()
+{
+   // Add code to check for potential trading opportunities in the XAUUSD market
+   // Return true if an opportunity is present, otherwise return false
+   return (/* Add logic to identify opportunities */);
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnDeinit(const int reason)
+{
+   // Add code to perform any necessary cleanup tasks before the program is shut down
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnStart()
+{
+   // Add code to handle any other events or actions that need to be performed
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTrade()
+{
+   // Add code to handle trade events such as trade execution, modification, or closure
+}
+
+//+------------------------------------------------------------------+
+//|                                                                  |
+//|                                                                  |
+//+------------------------------------------------------------------+
+void OnTimer()
+{
+   // Add code to handle timer events
+}
